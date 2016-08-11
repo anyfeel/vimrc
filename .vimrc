@@ -106,6 +106,14 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Right> <NOP>
 noremap <Left> <NOP>" Taglist
+
+nmap  w=  :resize +3<CR>
+nmap  w-  :resize -3<CR>
+nmap  w,  :vertical resize -3<CR>
+nmap  w.  :vertical resize +3<CR>
+
+
+" togglelist
 map tt :TlistToggle<CR>
 let Tlist_WinWidth = 45
 
@@ -178,7 +186,7 @@ map <leader>nn :NERDTreeToggle<CR>
 let g:ycm_python_binary_path = 'python'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_always_populate_location_list = 0
-let g:ycm_global_ycm_extra_conf = "/home/vagrant/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 nnoremap ff :YcmCompleter GoTo<CR> 
 nnoremap fr :YcmCompleter GoToReferences<CR> 
 
