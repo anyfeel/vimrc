@@ -109,8 +109,8 @@ noremap <Left> <NOP>
 
 nmap  w=  :resize +3<CR>
 nmap  w-  :resize -3<CR>
-nmap  w,  :vertical resize -3<CR>
-nmap  w.  :vertical resize +3<CR>
+nmap  w.  :vertical resize -3<CR>
+nmap  w,  :vertical resize +3<CR>
 
 inoremap ˙ <C-o>h
 inoremap ∆ <C-o>j
@@ -173,7 +173,8 @@ function! CurDir()
 	let curdir = substitute(getcwd(), $HOME, "~", "g")
 	return curdir
 endfunction
-set statusline=[%n]\ %f%m%r%h\ \|\ \ \ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \ 
+"set statusline=[%n]\ %f%m%r%h\ \|\ \ \ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \ 
+set statusline=[%n]\ %f%m%r%h\\|%=\|\ %l,%c\ %p%%\ 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -212,5 +213,3 @@ au FileType c,c++,python,lua let b:delimitMate_expand_space = 1
 
 let delimitMate_expand_cr = 1
 au FileType c,c++,python,lua let b:delimitMate_expand_cr = 1
-
-"add a test string
