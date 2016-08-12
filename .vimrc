@@ -105,17 +105,17 @@ inoremap <Left> <NOP>
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Right> <NOP>
-noremap <Left> <NOP>" Taglist
+noremap <Left> <NOP>
 
 nmap  w=  :resize +3<CR>
 nmap  w-  :resize -3<CR>
 nmap  w,  :vertical resize -3<CR>
 nmap  w.  :vertical resize +3<CR>
 
-inoremap <A-h> <C-o>h
-inoremap <A-j> <C-o>j
-inoremap <A-k> <C-o>k
-inoremap <A-l> <C-o>l
+inoremap ˙ <C-o>h
+inoremap ∆ <C-o>j
+inoremap ˚ <C-o>k
+inoremap ¬ <C-o>l
 
 " togglelist
 map tt :TlistToggle<CR>
