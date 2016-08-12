@@ -8,6 +8,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'git@github.com:vim-scripts/sessionman.vim.git'
 Plugin 'L9'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'Valloric/YouCompleteMe' 
@@ -213,3 +214,6 @@ au FileType c,c++,python,lua let b:delimitMate_expand_space = 1
 
 let delimitMate_expand_cr = 1
 au FileType c,c++,python,lua let b:delimitMate_expand_cr = 1
+
+" Ack 
+map <c-u> :Ack<space>
