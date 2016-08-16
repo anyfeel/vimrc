@@ -189,6 +189,7 @@ let g:NERDTreeWinPos = "left"
 map <leader>nn :NERDTreeToggle<CR>
 
 " YouCompleteMe
+let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_python_binary_path = 'python'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_always_populate_location_list = 0
@@ -197,12 +198,12 @@ nnoremap ff :YcmCompleter GoTo<CR>
 nnoremap fr :YcmCompleter GoToReferences<CR> 
 
 " Syntastic (syntax checker)
-let g:syntastic_check_on_open = 1
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0 
-let g:syntastic_check_on_wq = 1
-let g:syntastic_lua_checkers = ["luac", "luacheck"]
-let g:syntastic_lua_luacheck_args = "--no-unused-args" 
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_always_populate_loc_list = 0
+"let g:syntastic_auto_loc_list = 0 
+"let g:syntastic_check_on_wq = 1
+"let g:syntastic_lua_checkers = ["luac", "luacheck"]
+"let g:syntastic_lua_luacheck_args = "--no-unused-args" 
 
 " fugitive
 set diffopt=vertical,filler
@@ -216,4 +217,4 @@ let delimitMate_expand_cr = 1
 au FileType c,c++,python,lua let b:delimitMate_expand_cr = 1
 
 " Ack 
-map <c-u> :Ack<space>
+map <c-j> :Ack<space>
