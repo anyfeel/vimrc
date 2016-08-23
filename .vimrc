@@ -168,7 +168,8 @@ func! DeleteTrailingWS()
 endfunc
 
 autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
+autocmd BufWrite *.lua :call DeleteTrailingWS()
+autocmd BufWrite *.c :call DeleteTrailingWS()
 
 function! CurDir()
 	let curdir = substitute(getcwd(), $HOME, "~", "g")
@@ -217,4 +218,4 @@ let delimitMate_expand_cr = 1
 au FileType c,c++,python,lua let b:delimitMate_expand_cr = 1
 
 " Ack 
-map <c-j> :Ack<space>
+map <c-y> :Ack<space>
