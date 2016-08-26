@@ -85,6 +85,8 @@ set tw=500
 set tm=500
 set laststatus=2
 set t_Co=256
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+set nolist
 
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
