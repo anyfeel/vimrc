@@ -100,15 +100,15 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 
-noremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Right> <NOP>
-inoremap <Left> <NOP>
+"noremap <Up> <NOP>
+"inoremap <Down> <NOP>
+"inoremap <Right> <NOP>
+"inoremap <Left> <NOP>
 
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Right> <NOP>
-noremap <Left> <NOP>
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Right> <NOP>
+"noremap <Left> <NOP>
 
 nmap  w=  :resize +3<CR>
 nmap  w-  :resize -3<CR>
@@ -196,6 +196,7 @@ let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_python_binary_path = 'python'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_always_populate_location_list = 0
+let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 nnoremap ff :YcmCompleter GoTo<CR> 
 nnoremap fr :YcmCompleter GoToReferences<CR> 
@@ -221,3 +222,5 @@ au FileType c,c++,python,lua let b:delimitMate_expand_cr = 1
 
 " Ack 
 map <c-y> :Ack<space>
+
+imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
