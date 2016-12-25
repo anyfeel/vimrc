@@ -20,8 +20,8 @@ Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Glench/Vim-Jinja2-Syntax'
-
-
+Plugin 'vim-scripts/DrawIt'
+Plugin 'Yggdroot/indentLine'
 
 call vundle#end()           
 filetype plugin indent on 
