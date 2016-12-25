@@ -22,6 +22,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'vim-scripts/DrawIt'
 Plugin 'Yggdroot/indentLine'
+Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()           
 filetype plugin indent on 
