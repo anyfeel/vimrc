@@ -13,7 +13,7 @@ Plugin 'L9'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'git@github.com:scrooloose/nerdtree.git'
-Plugin 'git@github.com:scrooloose/syntastic.git'
+"Plugin 'git@github.com:scrooloose/syntastic.git'
 Plugin 'git@github.com:vim-scripts/taglist.vim.git'
 Bundle 'tpope/vim-surround'
 Plugin 'mileszs/ack.vim'
@@ -196,7 +196,7 @@ let g:NERDTreeWinPos = "left"
 map <leader>nn :NERDTreeToggle<CR>
 
 " YouCompleteMe
-let g:ycm_register_as_syntastic_checker = 0
+"let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_python_binary_path = 'python'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_always_populate_location_list = 0
@@ -205,28 +205,30 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 nnoremap ff :YcmCompleter GoTo<CR>
 nnoremap fr :YcmCompleter GoToReferences<CR>
 
-" Syntastic (syntax checker)
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_warning_symbol = "WW"
-let g:syntastic_error_symbol = "EE"
-let g:syntastic_style_warning_symbol = "SW"
-let g:syntastic_style_error_symbol = "SE"
-
-let g:syntastic_check_on_open = 0
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_lua_checkers = ["luacheck", "luac"]
-let g:syntastic_lua_luacheck_args = "--no-unused-args"
-
-let g:syntastic_python_checkers = ["pyflakes"]
+" Syntastic (syntax checker) ---> start
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_warning_symbol = "WW"
+"let g:syntastic_error_symbol = "EE"
+"let g:syntastic_style_warning_symbol = "SW"
+"let g:syntastic_style_error_symbol = "SE"
+"
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_wq = 0
+"
+"let g:syntastic_lua_checkers = ["luacheck", "luac"]
+"let g:syntastic_lua_luacheck_args = "--no-unused-args"
+"
+"let g:syntastic_python_checkers = ["pyflakes"]
 "let g:syntastic_python_pylint_args='--disable=C0111,C0112,C0301,C0302,R0903'
 
 "let g:syntastic_ignore_files=[".*\.py$", ".*\.lua$"]
+"
+" Syntastic (syntax checker) ---> end
 
 " fugitive
 set diffopt=vertical,filler
