@@ -223,8 +223,8 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_lua_checkers = ["luacheck", "luac"]
 let g:syntastic_lua_luacheck_args = "--no-unused-args"
 
-let g:syntastic_python_checkers = ["pylint"]
-let g:syntastic_python_pylint_args='--disable=C0111,C0112,C0301,C0302,R0903'
+let g:syntastic_python_checkers = ["pyflakes"]
+"let g:syntastic_python_pylint_args='--disable=C0111,C0112,C0301,C0302,R0903'
 
 "let g:syntastic_ignore_files=[".*\.py$", ".*\.lua$"]
 
