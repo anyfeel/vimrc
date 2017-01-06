@@ -248,3 +248,4 @@ map <leader>pp :setlocal paste!<cr>
 map <c-y> :Ack<space>
 
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+"set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor
