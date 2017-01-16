@@ -24,6 +24,7 @@ Plugin 'vim-scripts/DrawIt'
 Plugin 'Yggdroot/indentLine'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'davidhalter/jedi'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -242,11 +243,32 @@ au FileType c,c++,python,lua let b:delimitMate_expand_space = 1
 let delimitMate_expand_cr = 1
 au FileType c,c++,python,lua let b:delimitMate_expand_cr = 1
 
-map <leader>pp :setlocal paste!<cr>
-
+" indentLine
 autocmd Filetype json let g:indentLine_setConceal = 0
 
+" ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+endif
+
 " Ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
 map <c-y> :Ack<space>
 
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
