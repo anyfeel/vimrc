@@ -92,7 +92,7 @@ set laststatus=2
 set t_Co=256
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set nolist
-set cursorline
+"set cursorline
 
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
@@ -203,8 +203,8 @@ let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_always_populate_location_list = 0
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-nnoremap ff :YcmCompleter GoTo<CR>
-nnoremap fr :YcmCompleter GoToReferences<CR>
+nnoremap ff :YcmCompleter GoToDeclaration<CR>
+nnoremap fr :YcmCompleter GoToDefinition<CR>
 
 " Syntastic (syntax checker) ---> start
 "set statusline+=%#warningmsg#
@@ -243,6 +243,8 @@ let delimitMate_expand_cr = 1
 au FileType c,c++,python,lua let b:delimitMate_expand_cr = 1
 
 map <leader>pp :setlocal paste!<cr>
+
+autocmd Filetype json let g:indentLine_setConceal = 0
 
 " Ack
 map <c-y> :Ack<space>
