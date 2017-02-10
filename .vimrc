@@ -199,6 +199,8 @@ map <leader>nn :NERDTreeToggle<CR>
 
 " YouCompleteMe
 let g:ycm_register_as_syntastic_checker = 0
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_python_binary_path = 'python'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_always_populate_location_list = 0
