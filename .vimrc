@@ -96,6 +96,8 @@ set nolist
 "set cursorline
 
 vnoremap <C-c> "*y"
+set tags=tags;/
+
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
@@ -106,17 +108,6 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-
-"noremap <Up> <NOP>
-"inoremap <Down> <NOP>
-"inoremap <Right> <NOP>
-"inoremap <Left> <NOP>
-
-"noremap <Up> <NOP>
-"noremap <Down> <NOP>
-"noremap <Right> <NOP>
-"noremap <Left> <NOP>
 
 nmap  w=  :resize +3<CR>
 nmap  w-  :resize -3<CR>
@@ -193,7 +184,7 @@ set statusline=[%n]\ %f%m%r%h\\|%=\|\ %l,%c\ %p%%\
 " NERDtree
 let NERDTreeIgnore = ['\.pyc$']
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeWinPos = "left"
 map <leader>nn :NERDTreeToggle<CR>
@@ -207,8 +198,8 @@ let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_always_populate_location_list = 0
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-nnoremap ff :YcmCompleter GoToDeclaration<CR>
-nnoremap fr :YcmCompleter GoToDefinition<CR>
+nnoremap ff :YcmCompleter GoTo<CR>
+nnoremap fr :YcmCompleter GoToImplementationElseDeclaration<CR>
 
 " Syntastic (syntax checker) ---> start
 "set statusline+=%#warningmsg#
@@ -272,7 +263,31 @@ endif
 
 " Ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
-map <c-y> :Ack<space>
+"map <c-y> :Ack<space>
+map <c-y> :cs find g<space>
 
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 "set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor
+
+nnoremap <leader>p :set invpaste paste?<CR>
+set pastetoggle=<leader>p
+set showmode
+
+augroup filetype_lua
+    autocmd!
+    autocmd FileType lua setlocal iskeyword+=:
+augroup END
+
+if has("cscope")
+  set csprg=/usr/bin/cscope
+  set csto=1
+  "set cst
+  set nocsverb
+  " add any database in current directory
+  if filereadable("cscope.out")
+      cs add cscope.out
+  endif
+  set csverb
+endif
+
+map <C-\> :cs find c <C-R>=expand("<cword>")<CR><CR>
