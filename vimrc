@@ -13,14 +13,14 @@ Plugin 'L9'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'git@github.com:scrooloose/nerdtree.git'
-"Plugin 'git@github.com:scrooloose/syntastic.git'
+Plugin 'git@github.com:scrooloose/syntastic.git'
 Plugin 'git@github.com:vim-scripts/taglist.vim.git'
 Bundle 'tpope/vim-surround'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'Raimondi/delimitMate'
-Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'vim-scripts/DrawIt'
+"Plugin 'Glench/Vim-Jinja2-Syntax'
+"Plugin 'vim-scripts/DrawIt'
 Plugin 'Yggdroot/indentLine'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'davidhalter/jedi'
@@ -191,6 +191,10 @@ map <leader>nn :NERDTreeToggle<CR>
 
 " YouCompleteMe
 let g:ycm_register_as_syntastic_checker = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_python_binary_path = 'python'
@@ -278,16 +282,18 @@ augroup filetype_lua
     autocmd FileType lua setlocal iskeyword+=:
 augroup END
 
-if has("cscope")
-  set csprg=/usr/bin/cscope
-  set csto=1
-  "set cst
-  set nocsverb
-  " add any database in current directory
-  if filereadable("cscope.out")
-      cs add cscope.out
-  endif
-  set csverb
+if !has("mac")
+    if has("cscope")
+      set csprg=/usr/bin/cscope
+      set csto=1
+      "set cst
+      set nocsverb
+      " add any database in current directory
+      if filereadable("cscope.out")
+          cs add cscope.out
+      endif
+      set csverb
+    endif
 endif
 
 map <C-\> :cs find c <C-R>=expand("<cword>")<CR><CR>
