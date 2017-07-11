@@ -8,22 +8,16 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'git@github.com:vim-scripts/sessionman.vim.git'
 Plugin 'L9'
-Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'git@github.com:scrooloose/nerdtree.git'
-Plugin 'git@github.com:scrooloose/syntastic.git'
 Plugin 'git@github.com:vim-scripts/taglist.vim.git'
 Bundle 'tpope/vim-surround'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'Raimondi/delimitMate'
-"Plugin 'Glench/Vim-Jinja2-Syntax'
-"Plugin 'vim-scripts/DrawIt'
 Plugin 'Yggdroot/indentLine'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'davidhalter/jedi'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 call vundle#end()
@@ -35,7 +29,7 @@ filetype plugin indent on
 let mapleader = ","
 map <silent> <leader><cr> :noh<cr>
 
-syntax enable
+syntax on
 set background=dark
 colorscheme solarized
 
