@@ -9,7 +9,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'ervandew/supertab'
 Plugin 'git@github.com:scrooloose/nerdtree.git'
 Plugin 'git@github.com:vim-scripts/taglist.vim.git'
 Bundle 'tpope/vim-surround'
@@ -19,6 +20,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Yggdroot/indentLine'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 call vundle#end()
 filetype plugin indent on
@@ -87,6 +89,7 @@ set laststatus=2
 set t_Co=256
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set nolist
+set completeopt-=preview
 "set cursorline
 
 vnoremap <C-c> "*y"
@@ -152,6 +155,7 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
+" remember last edit position
 if has("autocmd")
 	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
@@ -184,45 +188,29 @@ let g:NERDTreeWinPos = "left"
 map <leader>nn :NERDTreeToggle<CR>
 
 " YouCompleteMe
-let g:ycm_register_as_syntastic_checker = 0
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_complete_in_comments = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_python_binary_path = 'python'
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_always_populate_location_list = 0
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-nnoremap ff :YcmCompleter GoTo<CR>
-nnoremap fr :YcmCompleter GoToImplementationElseDeclaration<CR>
+"let g:ycm_auto_trigger = 99
+"let g:ycm_register_as_syntastic_checker = 0
+"let g:ycm_show_diagnostics_ui = 0
+"let g:ycm_enable_diagnostic_signs = 0
+"let g:ycm_enable_diagnostic_highlighting = 0
+"let g:ycm_enable_diagnostic_highlighting = 0
+"let g:ycm_complete_in_comments = 1
+"let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"let g:ycm_python_binary_path = 'python'
+"let g:ycm_min_num_of_chars_for_completion = 2
+"let g:ycm_always_populate_location_list = 0
+"let g:ycm_add_preview_to_completeopt = 0
+"let g:ycm_autoclose_preview_window_after_completion=1
+"let g:ycm_key_list_select_completion = []
+"let g:ycm_key_list_previous_completion = []
+"let g:ycm_filetype_specific_completion_to_disable = {'lua':1, 'go':1}
+"let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+"let g:ycm_filetype_whitelist = {'python' : 1, 'c':1, 'cpp':1}
+"nnoremap ff :YcmCompleter GoTo<CR>
+"nnoremap fr :YcmCompleter GoToImplementationElseDeclaration<CR>
 
-" Syntastic (syntax checker) ---> start
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"
-"let g:syntastic_warning_symbol = "WW"
-"let g:syntastic_error_symbol = "EE"
-"let g:syntastic_style_warning_symbol = "SW"
-"let g:syntastic_style_error_symbol = "SE"
-"
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_wq = 0
-"
-"let g:syntastic_lua_checkers = ["luacheck", "luac"]
-"let g:syntastic_lua_luacheck_args = "--no-unused-args"
-"
-"let g:syntastic_python_checkers = ["pyflakes"]
-"let g:syntastic_python_pylint_args='--disable=C0111,C0112,C0301,C0302,R0903'
-
-"let g:syntastic_ignore_files=[".*\.py$", ".*\.lua$"]
-"
-" Syntastic (syntax checker) ---> end
+" Supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " fugitive
 set diffopt=vertical,filler
@@ -264,7 +252,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 "map <c-y> :Ack<space>
 map <c-y> :cs find g<space>
 
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+"imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 "set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor
 
 nnoremap <leader>p :set invpaste paste?<CR>
