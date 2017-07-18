@@ -17,7 +17,6 @@ Bundle 'tpope/vim-surround'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'Raimondi/delimitMate'
-"Plugin 'Yggdroot/indentLine'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
@@ -172,7 +171,6 @@ function! CurDir()
 	let curdir = substitute(getcwd(), $HOME, "~", "g")
 	return curdir
 endfunction
-"set statusline=[%n]\ %f%m%r%h\ \|\ \ \ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \
 set statusline=[%n]\ %f%m%r%h\\|%=\|\ %l,%c\ %p%%\
 
 
