@@ -220,6 +220,8 @@ au FileType c,c++,python,lua let b:delimitMate_expand_space = 1
 let delimitMate_expand_cr = 1
 au FileType c,c++,python,lua let b:delimitMate_expand_cr = 1
 
+imap  <C-space> <Plug>delimitMateS-Tab
+
 " indentLine
 autocmd Filetype json let g:indentLine_setConceal = 0
 
