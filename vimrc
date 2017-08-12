@@ -20,6 +20,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'git@github.com:basilgor/vim-autotags.git'
 
 call vundle#end()
 filetype plugin indent on
