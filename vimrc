@@ -203,7 +203,7 @@ let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-let g:ycm_filetype_whitelist = {'python' : 1, 'c':1, 'cpp':1}
+let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1}
 nnoremap ff :YcmCompleter GoTo<CR>
 nnoremap fr :YcmCompleter GoToImplementationElseDeclaration<CR>
 
@@ -229,7 +229,10 @@ autocmd Filetype json let g:indentLine_setConceal = 0
 " ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
