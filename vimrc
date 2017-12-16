@@ -251,10 +251,7 @@ endif
 " Ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
 map <c-y> :Ack <C-R><C-W><CR>
-"map <c-y> :cs find g<space>
 
-"imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
-"set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor
 
 nnoremap <leader>p :set invpaste paste?<CR>
 set pastetoggle=<leader>p
