@@ -31,8 +31,8 @@ filetype plugin indent on
 let mapleader = ","
 map <silent> <leader><cr> :noh<cr>
 
-syntax on
-set background=dark
+syntax enable
+set background=light
 colorscheme solarized
 
 command W w
@@ -192,7 +192,6 @@ let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_python_binary_path = 'python'
@@ -213,18 +212,6 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " fugitive
 set diffopt=vertical,filler
 autocmd BufRead,BufNewFile *.zt set filetype=ztest
-
-" delimitMate
-let delimitMate_expand_space = 1
-au FileType c,c++,python,lua let b:delimitMate_expand_space = 1
-
-let delimitMate_expand_cr = 1
-au FileType c,c++,python,lua let b:delimitMate_expand_cr = 1
-
-imap  <C-space> <Plug>delimitMateS-Tab
-
-" indentLine
-autocmd Filetype json let g:indentLine_setConceal = 0
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
@@ -276,4 +263,4 @@ if !has("mac")
     endif
 endif
 
-map <C-\> :cs find c <C-R>=expand("<cword>")<CR><CR>
+imap <C-\> <Plug>delimitMateS-Tab
