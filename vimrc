@@ -31,8 +31,10 @@ filetype plugin indent on
 let mapleader = ","
 map <silent> <leader><cr> :noh<cr>
 
+"let g:solarized_termcolors=256
+
 syntax enable
-set background=light
+set background=dark
 colorscheme solarized
 
 command W w
@@ -79,7 +81,6 @@ set nobackup
 set nowb
 set noswapfile
 set expandtab
-"set smarttab
 set shiftwidth=4
 set tabstop=4
 set lbr
@@ -90,7 +91,8 @@ set t_Co=256
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set nolist
 set completeopt-=preview
-"set cursorline
+
+au BufRead,BufNewFile Makefile* set noexpandtab
 
 vnoremap <C-c> "*y"
 set tags=tags;/
