@@ -91,6 +91,7 @@ set t_Co=256
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set nolist
 set completeopt-=preview
+set foldmethod=manual
 
 au BufRead,BufNewFile Makefile* set noexpandtab
 
@@ -206,7 +207,6 @@ let g:ycm_key_list_previous_completion = []
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1}
 nnoremap ff :YcmCompleter GoTo<CR>
-nnoremap fr :YcmCompleter GoToImplementationElseDeclaration<CR>
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -266,3 +266,14 @@ if !has("mac")
 endif
 
 imap <C-\> <Plug>delimitMateS-Tab
+
+"s: Find this C symbol
+"g: Find this definition
+"c: Find functions calling this function
+"a: Find places where this symbol is assigned a value
+"d: Find functions called by this function
+map <leader>ss :cs find s <C-R>=expand("<cword>")<CR><CR>
+map <leader>gg :cs find g <C-R>=expand("<cword>")<CR><CR>
+map <leader>cc :cs find c <C-R>=expand("<cword>")<CR><CR>
+map <leader>aa :cs find a <C-R>=expand("<cword>")<CR><CR>
+map <leader>dd :scs find d <C-R>=expand("<cword>")<CR><CR>
