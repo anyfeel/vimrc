@@ -12,7 +12,7 @@ Plugin 'L9'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 Plugin 'git@github.com:scrooloose/nerdtree.git'
-Plugin 'git@github.com:vim-scripts/taglist.vim.git'
+Plugin 'git@github.com:majutsushi/tagbar.git'
 Bundle 'tpope/vim-surround'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-repeat'
@@ -120,8 +120,12 @@ inoremap ˚ <C-o>k
 inoremap ¬ <C-o>l
 
 " togglelist
-map tt :TlistToggle<CR>
-let Tlist_WinWidth = 45
+" map tt :TlistToggle<CR>
+" let Tlist_WinWidth = 45
+"
+" tagbar
+map tt :TagbarToggle<CR>
+let g:tagbar_width = 25
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -222,6 +226,7 @@ let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_extensions = ['tag']
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
@@ -238,7 +243,8 @@ if executable('ag')
 endif
 
 " Ack
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ackprg = 'ag --vimgrep'
 map <c-y> :Ack <C-R><C-W><CR>
 
 
