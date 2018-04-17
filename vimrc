@@ -179,7 +179,7 @@ function! CurDir()
 	let curdir = substitute(getcwd(), $HOME, "~", "g")
 	return curdir
 endfunction
-set statusline=%f%m%r%h\ \|%=\|\ %{Tlist_Get_Tagname_By_Line()}\ %l,%c\ %p%%
+set statusline=%f%m%r%h\ \ \ \ %{Tlist_Get_Tagname_By_Line()}\ \|%=\|\ %l,%c\ %p%%
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
