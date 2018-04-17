@@ -12,7 +12,7 @@ Plugin 'L9'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 Plugin 'git@github.com:scrooloose/nerdtree.git'
-Plugin 'git@github.com:majutsushi/tagbar.git'
+Plugin 'git@github.com:vim-scripts/taglist.vim.git'
 Bundle 'tpope/vim-surround'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-repeat'
@@ -92,6 +92,7 @@ set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set nolist
 set completeopt-=preview
 set foldmethod=manual
+set updatetime=100
 
 au BufRead,BufNewFile Makefile* set noexpandtab
 
@@ -119,13 +120,12 @@ inoremap ∆ <C-o>j
 inoremap ˚ <C-o>k
 inoremap ¬ <C-o>l
 
-" togglelist
-" map tt :TlistToggle<CR>
-" let Tlist_WinWidth = 45
-"
-" tagbar
-map tt :TagbarToggle<CR>
-let g:tagbar_width = 25
+" taglist
+map tt :TlistToggle<CR>
+let Tlist_WinWidth = 40
+let Tlist_Show_One_File = 1
+let Tlist_Process_File_Always = 1
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -179,7 +179,7 @@ function! CurDir()
 	let curdir = substitute(getcwd(), $HOME, "~", "g")
 	return curdir
 endfunction
-set statusline=[%n]\ %f%m%r%h\\|%=\|\ %l,%c\ %p%%\
+set statusline=%f%m%r%h\ \|%=\|\ %{Tlist_Get_Tagname_By_Line()}\ %l,%c\ %p%%
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
