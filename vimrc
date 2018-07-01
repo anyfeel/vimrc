@@ -19,8 +19,12 @@ Plugin 'tpope/vim-repeat'
 Plugin 'Raimondi/delimitMate'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'iamcco/markdown-preview.vim'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plugin 'git@github.com:basilgor/vim-autotags.git'
+Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'chr4/nginx.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -93,6 +97,8 @@ set nolist
 set completeopt-=preview
 set foldmethod=manual
 set updatetime=100
+set rtp+=/usr/local/opt/fzf
+set rtp+=~/.vim/bundle/gocode/vim
 
 au BufRead,BufNewFile Makefile* set noexpandtab
 
@@ -110,6 +116,11 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+nnoremap <Up>    <C-W>k
+nnoremap <Down>  <C-W>j
+nnoremap <Left>  <C-W>h
+nnoremap <Right> <C-W>l
+
 nmap  w=  :resize +3<CR>
 nmap  w-  :resize -3<CR>
 nmap  w.  :vertical resize -3<CR>
@@ -122,9 +133,9 @@ inoremap ¬ <C-o>l
 
 " taglist
 map tt :TlistToggle<CR>
-let Tlist_WinWidth = 40
-let Tlist_Show_One_File = 1
-let Tlist_Process_File_Always = 1
+" let Tlist_WinWidth = 40
+" let Tlist_Show_One_File = 1
+" let Tlist_Process_File_Always = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -227,6 +238,8 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_extensions = ['tag']
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:airline#extensions#tabline#enabled = 1
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
