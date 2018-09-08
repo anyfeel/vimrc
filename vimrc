@@ -12,7 +12,7 @@ Plugin 'L9'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 Plugin 'git@github.com:scrooloose/nerdtree.git'
-Plugin 'git@github.com:vim-scripts/taglist.vim.git'
+Plugin 'git@github.com:majutsushi/tagbar.git'
 Bundle 'tpope/vim-surround'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-repeat'
@@ -22,7 +22,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'iamcco/markdown-preview.vim'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plugin 'git@github.com:basilgor/vim-autotags.git'
+"Plugin 'git@github.com:basilgor/vim-autotags.git'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'chr4/nginx.vim'
 
@@ -99,6 +99,7 @@ set foldmethod=manual
 set updatetime=100
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.vim/bundle/gocode/vim
+set foldmethod=manual
 
 au BufRead,BufNewFile Makefile* set noexpandtab
 
@@ -131,12 +132,12 @@ inoremap ∆ <C-o>j
 inoremap ˚ <C-o>k
 inoremap ¬ <C-o>l
 
-" taglist
-map tt :TlistToggle<CR>
-" let Tlist_WinWidth = 40
-" let Tlist_Show_One_File = 1
-" let Tlist_Process_File_Always = 1
+" tagbar
+map tt :TagbarToggle<CR>
+let g:tagbar_left = 1
+let g:tagbar_width = 30
 
+autocmd BufNewFile,BufRead *.conf set syntax=nginx
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -190,8 +191,7 @@ function! CurDir()
 	let curdir = substitute(getcwd(), $HOME, "~", "g")
 	return curdir
 endfunction
-set statusline=%f%m%r%h\ \ \ \ %{Tlist_Get_Tagname_By_Line()}\ \|%=\|\ %l,%c\ %p%%
-
+set statusline=%f%m%r%h\ \ \ \ %{tagbar#currenttag('[%s]\ ','')}\ \|%=\|\ %l,%c\ %p%%
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Section
@@ -229,6 +229,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " fugitive
 set diffopt=vertical,filler
 autocmd BufRead,BufNewFile *.zt set filetype=ztest
+autocmd BufRead,BufNewFile *.t set filetype=ztest
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
@@ -259,7 +260,6 @@ endif
 " let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ackprg = 'ag --vimgrep'
 map <c-y> :Ack <C-R><C-W><CR>
-
 
 nnoremap <leader>p :set invpaste paste?<CR>
 set pastetoggle=<leader>p
