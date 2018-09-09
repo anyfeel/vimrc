@@ -1,35 +1,44 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vundle Section
+" => Vim-Plug Section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'L9'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'ervandew/supertab'
-Plugin 'git@github.com:scrooloose/nerdtree.git'
-Plugin 'git@github.com:majutsushi/tagbar.git'
-Bundle 'tpope/vim-surround'
-Plugin 'mileszs/ack.vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'Raimondi/delimitMate'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'iamcco/markdown-preview.vim'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Plugin 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"Plugin 'git@github.com:basilgor/vim-autotags.git'
-Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'chr4/nginx.vim'
+Plug 'git@github.com:tpope/vim-surround.git'
+Plug 'tpope/vim-fugitive'
+Plug 'Valloric/YouCompleteMe'
+Plug 'ervandew/supertab'
+Plug 'git@github.com:scrooloose/nerdtree.git'
+Plug 'git@github.com:majutsushi/tagbar.git'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-repeat'
+Plug 'Raimondi/delimitMate'
+Plug 'altercation/vim-colors-solarized'
+Plug 'Yggdroot/LeaderF'
+Plug 'iamcco/markdown-preview.vim'
+Plug 'nsf/gocode', {'rtp': 'vim/'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'chr4/nginx.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'w0rp/ale'
+Plug 'mhinz/vim-signify'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-syntax'
+Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
+Plug 'sgur/vim-textobj-parameter'
+Plug 'tpope/vim-unimpaired'
+Plug 'justinmk/vim-dirvish'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-call vundle#end()
+call plug#end()
+
 filetype plugin indent on
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Setting Section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
@@ -41,6 +50,50 @@ syntax enable
 set background=dark
 colorscheme solarized
 
+" alt meta key
+function! Terminal_MetaMode(mode)
+    set ttimeout
+    if $TMUX != ''
+        set ttimeoutlen=30
+    elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
+        set ttimeoutlen=80
+    endif
+    if has('nvim') || has('gui_running')
+        return
+    endif
+    function! s:metacode(mode, key)
+        if a:mode == 0
+            exec "set <M-".a:key.">=\e".a:key
+        else
+            exec "set <M-".a:key.">=\e]{0}".a:key."~"
+        endif
+    endfunc
+    for i in range(10)
+        call s:metacode(a:mode, nr2char(char2nr('0') + i))
+    endfor
+    for i in range(26)
+        call s:metacode(a:mode, nr2char(char2nr('a') + i))
+        call s:metacode(a:mode, nr2char(char2nr('A') + i))
+    endfor
+    if a:mode != 0
+        for c in [',', '.', '/', ';', '[', ']', '{', '}']
+            call s:metacode(a:mode, c)
+        endfor
+        for c in ['?', ':', '-', '_']
+            call s:metacode(a:mode, c)
+        endfor
+    else
+        for c in [',', '.', '/', ';', '{', '}']
+            call s:metacode(a:mode, c)
+        endfor
+        for c in ['?', ':', '-', '_']
+            call s:metacode(a:mode, c)
+        endfor
+    endif
+endfunc
+
+call Terminal_MetaMode(0)
+
 command W w
 command WQ wq
 command Wa wa
@@ -50,6 +103,8 @@ command QA qa
 command Qa qa
 command Wqa wqa
 command WA wa
+" async run with fugitive
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 cnoremap w!! w !sudo tee % >/dev/null
 
 set nu
@@ -104,7 +159,7 @@ set foldmethod=manual
 au BufRead,BufNewFile Makefile* set noexpandtab
 
 vnoremap <C-c> "*y"
-set tags=tags;/
+set tags=./.tags;,.tags
 
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
@@ -131,6 +186,17 @@ inoremap ˙ <C-o>h
 inoremap ∆ <C-o>j
 inoremap ˚ <C-o>k
 inoremap ¬ <C-o>l
+
+noremap <M-1> 1gt
+noremap <M-2> 2gt
+noremap <M-3> 3gt
+noremap <M-4> 4gt
+noremap <M-5> 5gt
+noremap <M-6> 6gt
+noremap <M-7> 7gt
+noremap <M-8> 8gt
+noremap <M-9> 9gt
+noremap <M-0> :tablast<CR>
 
 " tagbar
 map tt :TagbarToggle<CR>
@@ -191,7 +257,7 @@ function! CurDir()
 	let curdir = substitute(getcwd(), $HOME, "~", "g")
 	return curdir
 endfunction
-set statusline=%f%m%r%h\ \ \ \ %{tagbar#currenttag('[%s]\ ','')}\ \|%=\|\ %l,%c\ %p%%
+"set statusline=%f%m%r%h\ \ \ \ %{tagbar#currenttag('[%s]\ ','')}\ \|%=\|\ %l,%c\ %p%%
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Section
@@ -199,7 +265,6 @@ set statusline=%f%m%r%h\ \ \ \ %{tagbar#currenttag('[%s]\ ','')}\ \|%=\|\ %l,%c\
 " NERDtree
 let NERDTreeIgnore = ['\.pyc$']
 autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeWinPos = "left"
 map <leader>nn :NERDTreeToggle<CR>
@@ -220,41 +285,50 @@ let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1}
+let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1, 'lua':1}
 nnoremap ff :YcmCompleter GoTo<CR>
+
+let g:ycm_semantic_triggers =  {
+\   'c' : ['->', '.'],
+\   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+\             're!\[.*\]\s'],
+\   'ocaml' : ['.', '#'],
+\   'cpp,cuda,objcpp' : ['->', '.', '::'],
+\   'perl' : ['->'],
+\   'php' : ['->', '::'],
+\   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+\   'ruby' : ['.', '::'],
+\   'lua' : ['.', ':'],
+\   'erlang' : [':'],
+\ }
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " fugitive
 set diffopt=vertical,filler
+
+" zset highlight
 autocmd BufRead,BufNewFile *.zt set filetype=ztest
 autocmd BufRead,BufNewFile *.t set filetype=ztest
 
-" ctrlp
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_extensions = ['tag']
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:airline#extensions#tabline#enabled = 1
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
+" leaderf
+let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_ShortcutB = '<m-n>'
+map <leader>ll :LeaderfFunction<CR>
+noremap <c-n> :LeaderfMru<cr>
+noremap <m-n> :LeaderfBuffer<cr>
+noremap <m-m> :LeaderfTag<cr>
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
-endif
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 
 " Ack
 " let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -270,6 +344,7 @@ augroup filetype_lua
     autocmd FileType lua setlocal iskeyword+=:
 augroup END
 
+" cscope
 if !has("mac")
     if has("cscope")
       set csprg=/usr/bin/cscope
@@ -296,3 +371,52 @@ map <leader>gg :cs find g <C-R>=expand("<cword>")<CR><CR>
 map <leader>cc :cs find c <C-R>=expand("<cword>")<CR><CR>
 map <leader>aa :cs find a <C-R>=expand("<cword>")<CR><CR>
 map <leader>dd :scs find d <C-R>=expand("<cword>")<CR><CR>
+
+function! g:CscopeDone()
+	exec "cs add ".fnameescape(g:asyncrun_text)
+endfunc
+
+function! g:CscopeUpdate(workdir, cscopeout)
+	let l:cscopeout = fnamemodify(a:cscopeout, ":p")
+	let l:cscopeout = fnameescape(l:cscopeout)
+	let l:workdir = (a:workdir == '')? '.' : a:workdir
+	try | exec "cs kill ".l:cscopeout | catch | endtry
+	exec "AsyncRun -post=call\\ g:CscopeDone() ".
+				\ "-text=".l:cscopeout." "
+				\ "-cwd=".fnameescape(l:workdir)." ".
+				\ "cscope -b -R -f ".l:cscopeout
+endfunc
+
+noremap <F9> :call g:CscopeUpdate(".", "cscope.out")<cr>
+
+" gutentags
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+let g:gutentags_ctags_tagfile = '.tags'
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+
+" async run
+let g:asyncrun_open = 6
+let g:asyncrun_bell = 1
+nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+
+" ale
+
+" signify
+nnoremap <leader>gt :SignifyToggle<CR>
+nnoremap <leader>gh :SignifyToggleHighlight<CR>
+nnoremap <leader>gr :SignifyRefresh<CR>
+nnoremap <leader>gd :SignifyDiff<CR>
+nnoremap <F8> :SignifyDiff<CR>
+
+" hunk jumping
+nmap <leader>gj <plug>(signify-next-hunk)
+nmap <leader>gk <plug>(signify-prev-hunk)
