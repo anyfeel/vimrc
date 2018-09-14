@@ -15,6 +15,7 @@ Plug 'tpope/vim-repeat'
 Plug 'Raimondi/delimitMate'
 Plug 'altercation/vim-colors-solarized'
 Plug 'Yggdroot/LeaderF'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'iamcco/markdown-preview.vim'
 Plug 'nsf/gocode', {'rtp': 'vim/'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -37,6 +38,9 @@ Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 filetype plugin indent on
+
+" airline-theme
+let g:airline_theme='solarized'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Setting Section
@@ -327,7 +331,7 @@ let g:Lf_WindowHeight = 0.30
 let g:Lf_CacheDirectory = expand('~/.vim/cache')
 let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
-let g:Lf_StlColorscheme = 'powerline'
+"let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 
 " Ack
@@ -409,6 +413,10 @@ let g:asyncrun_bell = 1
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " ale
+hi! link ALEError DiffDelete
+hi! link ALEWarning DiffDelete
+hi! link ALEErrorSign DiffDelete
+hi! link ALEWarningSign DiffDelete
 
 " signify
 nnoremap <leader>gt :SignifyToggle<CR>
@@ -420,3 +428,18 @@ nnoremap <F8> :SignifyDiff<CR>
 " hunk jumping
 nmap <leader>gj <plug>(signify-next-hunk)
 nmap <leader>gk <plug>(signify-prev-hunk)
+
+au FileType qf call AdjustWindowHeight(3, 10)
+function! AdjustWindowHeight(minheight, maxheight)
+   let l = 1
+   let n_lines = 0
+   let w_width = winwidth(0)
+   while l <= line('$')
+	   " number to float for division
+	   let l_len = strlen(getline(l)) + 0.0
+	   let line_width = l_len/w_width
+	   let n_lines += float2nr(ceil(line_width))
+	   let l += 1
+   endw
+   exe max([min([n_lines, a:maxheight]), a:minheight]) . "wincmd _"
+endfunction
