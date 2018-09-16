@@ -34,6 +34,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'justinmk/vim-dirvish'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'rizzatti/dash.vim'
 
 call plug#end()
 
@@ -288,23 +289,9 @@ let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []
-let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1, 'lua':1}
 nnoremap ff :YcmCompleter GoTo<CR>
-
-let g:ycm_semantic_triggers =  {
-\   'c' : ['->', '.'],
-\   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
-\             're!\[.*\]\s'],
-\   'ocaml' : ['.', '#'],
-\   'cpp,cuda,objcpp' : ['->', '.', '::'],
-\   'perl' : ['->'],
-\   'php' : ['->', '::'],
-\   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
-\   'ruby' : ['.', '::'],
-\   'lua' : ['.', ':'],
-\   'erlang' : [':'],
-\ }
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -429,17 +416,5 @@ nnoremap <F8> :SignifyDiff<CR>
 nmap <leader>gj <plug>(signify-next-hunk)
 nmap <leader>gk <plug>(signify-prev-hunk)
 
-au FileType qf call AdjustWindowHeight(3, 10)
-function! AdjustWindowHeight(minheight, maxheight)
-   let l = 1
-   let n_lines = 0
-   let w_width = winwidth(0)
-   while l <= line('$')
-	   " number to float for division
-	   let l_len = strlen(getline(l)) + 0.0
-	   let line_width = l_len/w_width
-	   let n_lines += float2nr(ceil(line_width))
-	   let l += 1
-   endw
-   exe max([min([n_lines, a:maxheight]), a:minheight]) . "wincmd _"
-endfunction
+" dash search
+nmap <silent> <leader>d <Plug>DashSearch
