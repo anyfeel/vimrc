@@ -15,7 +15,6 @@ Plug 'tpope/vim-repeat'
 Plug 'Raimondi/delimitMate'
 Plug 'altercation/vim-colors-solarized'
 Plug 'Yggdroot/LeaderF'
-"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'iamcco/markdown-preview.vim'
 Plug 'nsf/gocode', {'rtp': 'vim/'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -172,15 +171,19 @@ vnoremap <silent> # :call VisualSelection('b', '')<CR>
 map j gj
 map k gk
 
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+"nnoremap <C-j> <C-W>j
+"nnoremap <C-k> <C-W>k
+"nnoremap <C-h> <C-W>h
+"nnoremap <C-l> <C-W>l
 
 nnoremap <Up>    <C-W>k
 nnoremap <Down>  <C-W>j
 nnoremap <Left>  <C-W>h
 nnoremap <Right> <C-W>l
+"nnoremap <Up>    k
+"nnoremap <Down>  j
+"nnoremap <Left>  h
+"nnoremap <Right> l
 
 nmap  w=  :resize +3<CR>
 nmap  w-  :resize -3<CR>
@@ -311,6 +314,8 @@ noremap <c-n> :LeaderfMru<cr>
 noremap <m-n> :LeaderfBuffer<cr>
 noremap <m-m> :LeaderfTag<cr>
 let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
+let g:Lf_DefaultMode = 'FullPath'
 
 let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
 let g:Lf_WorkingDirectoryMode = 'Ac'
