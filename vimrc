@@ -113,6 +113,8 @@ set updatetime=100
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.vim/bundle/gocode/vim
 set foldmethod=manual
+"set cursorcolumn
+"set cursorline
 
 au BufRead,BufNewFile Makefile* set noexpandtab
 
