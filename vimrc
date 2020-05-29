@@ -239,7 +239,7 @@ let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1, 'lua':1}
+let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1, 'lua':1, 'java':1}
 nnoremap ff :YcmCompleter GoTo<CR>
 
 " Supertab
