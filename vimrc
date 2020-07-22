@@ -239,7 +239,8 @@ let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1, 'lua':1, 'java':1}
+"let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1, 'lua':1, 'java':1}
+let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1, 'lua':1}
 nnoremap ff :YcmCompleter GoTo<CR>
 
 " Supertab
@@ -331,7 +332,7 @@ endfunc
 
 noremap <F9> :call g:CscopeUpdate(".", "cscope.out")<cr>
 
-" gutentags
+" gutentags | check gutentags_plus
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 let g:gutentags_ctags_tagfile = '.tags'
 let s:vim_tags = expand('~/.cache/tags')
