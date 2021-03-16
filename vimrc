@@ -15,6 +15,7 @@ Plug 'tpope/vim-repeat'
 Plug 'Raimondi/delimitMate'
 Plug 'altercation/vim-colors-solarized'
 Plug 'Yggdroot/LeaderF'
+" tabular 类似按照 column 对齐
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'nsf/gocode', {'rtp': 'vim/'}
@@ -23,7 +24,7 @@ Plug 'chr4/nginx.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'mhinz/vim-signify'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
@@ -50,6 +51,7 @@ map <silent> <leader><cr> :noh<cr>
 
 "let g:solarized_termcolors=256
 
+" basic command mapping
 syntax enable
 set background=dark
 colorscheme solarized
@@ -62,10 +64,12 @@ command QA qa
 command Qa qa
 command Wqa wqa
 command WA wa
+command Ack ack
 " async run with fugitive
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 cnoremap w!! w !sudo tee % >/dev/null
 
+" basic settings
 set nu
 set ai
 set si
@@ -137,10 +141,6 @@ nnoremap <Up>    <C-W>k
 nnoremap <Down>  <C-W>j
 nnoremap <Left>  <C-W>h
 nnoremap <Right> <C-W>l
-"nnoremap <Up>    k
-"nnoremap <Down>  j
-"nnoremap <Left>  h
-"nnoremap <Right> l
 
 nmap  w=  :resize +3<CR>
 nmap  w-  :resize -3<CR>
@@ -152,6 +152,7 @@ inoremap ∆ <C-o>j
 inoremap ˚ <C-o>k
 inoremap ¬ <C-o>l
 
+" ===============================
 " tagbar
 map tt :TagbarToggle<CR>
 let g:tagbar_left = 1
@@ -240,7 +241,7 @@ let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 "let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1, 'lua':1, 'java':1}
-let g:ycm_filetype_whitelist = {'python':1, 'c':1, 'cpp':1, 'go':1, 'lua':1}
+let g:ycm_filetype_whitelist = {'c':1, 'cpp':1, 'go':1, 'lua':1}
 nnoremap ff :YcmCompleter GoTo<CR>
 
 " Supertab
@@ -261,7 +262,7 @@ noremap <c-n> :LeaderfMru<cr>
 noremap <m-n> :LeaderfBuffer<cr>
 noremap <m-m> :LeaderfTag<cr>
 let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
-let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
+" let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
 let g:Lf_DefaultMode = 'FullPath'
 
 let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
@@ -352,10 +353,10 @@ let g:asyncrun_bell = 1
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " ale
-hi! link ALEError DiffDelete
-hi! link ALEWarning DiffDelete
-hi! link ALEErrorSign DiffDelete
-hi! link ALEWarningSign DiffDelete
+" hi! link ALEError DiffDelete
+" hi! link ALEWarning DiffDelete
+" hi! link ALEErrorSign DiffDelete
+" hi! link ALEWarningSign DiffDelete
 
 " signify
 nnoremap <leader>gt :SignifyToggle<CR>
@@ -367,7 +368,6 @@ nnoremap <F8> :SignifyDiff<CR>
 " hunk jumping
 nmap <leader>gj <plug>(signify-next-hunk)
 nmap <leader>gk <plug>(signify-prev-hunk)
-
 
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_toc_autofit = 1
